@@ -6,7 +6,8 @@ export class CreateTableState1686086828130 implements MigrationInterface {
         CREATE TABLE public.state (
             id integer NOT NULL,
             name character varying NOT NULL,
-            create_at timestamp without time zone DEFAULT now() NOT NULL,
+            uf varchar(2) NOT NULL,
+            created_at timestamp without time zone DEFAULT now() NOT NULL,
             updated_at timestamp without time zone DEFAULT now() NOT NULL,
             primary key (id)
         );
@@ -20,7 +21,7 @@ export class CreateTableState1686086828130 implements MigrationInterface {
             CACHE 1;
         
         ALTER SEQUENCE public.state_id_seq OWNED BY public.state.id;
-        ALTER TABLE ONLY public.state ALTER COLUMN id SET DEFAULT nextval('public.state_id_seq'::regclass):
+        ALTER TABLE ONLY public.state ALTER COLUMN id SET DEFAULT nextval('public.state_id_seq'::regclass);
     `);
   }
 
