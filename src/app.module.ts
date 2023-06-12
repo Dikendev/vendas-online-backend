@@ -5,7 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
 import { AddressModule } from './address/address.module';
-import { CacheModule } from '@nestjs/cache-manager';
+import { CacheModule as Cache } from '@nestjs/cache-manager';
+import { CacheModule } from './cache/cache.module';
 
 @Module({
   imports: [
@@ -23,11 +24,12 @@ import { CacheModule } from '@nestjs/cache-manager';
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
     }),
-    CacheModule.register(),
+    Cache.register(),
     UserModule,
     StateModule,
     CityModule,
     AddressModule,
+    CacheModule,
   ],
   controllers: [],
   providers: [],
