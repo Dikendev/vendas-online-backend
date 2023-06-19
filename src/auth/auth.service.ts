@@ -1,30 +1,21 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserEntity } from 'src/user/entities/user.entity';
-import { LoginDTO } from './dtos/login.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
-import { compare } from 'bcrypt';
-import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthService {
-  
   constructor(
-  @InjectRepository(UserEntity)
-    private userService: UserService) {}
+    private readonly userService: UserService,
+  ) {}
 
-  async login(loginDTO: LoginDTO): Promise<UserEntity> {
-    const user: UserEntity | undefined = await this.userService
-      .findUserByEmail(loginDTO.email)
-      .catch(() => undefined);
-    
-    console.log(user);
+  async signIn(email: string, pass: string): Promise<any> {
+    const user = await this.userService.findUserByEmail(email);
 
-    const isMatch = await compare(loginDTO.password, user?.password || '');
-
-    if (!user || !isMatch) {
-      throw new NotFoundException(`Email or password invalid`);
+    if(user?.password !== pass) {
+      throw new UnauthorizedException();
     }
+    console.log(user.password, pass)
+    const {password, ...result} = user;
 
-    return user;
+    return result;
   }
 }
