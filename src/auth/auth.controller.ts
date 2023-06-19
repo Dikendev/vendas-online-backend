@@ -8,6 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { ReturnSign } from './dtos/returnLogin.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,7 +17,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UsePipes(ValidationPipe)
   @Post()
-  signIn(@Body() signInDTO: Record<string, any>) {
+  signIn(@Body() signInDTO: Record<string, any>): Promise<ReturnSign>{
     return this.authService.signIn(signInDTO.email, signInDTO.password);
   }
 }
