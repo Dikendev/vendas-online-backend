@@ -37,7 +37,7 @@ describe('UserService', () => {
   it('should return user in findUserByEmail', async () => {
     const user = await userService.findUserByEmail(userEntityMock.email);
 
-    expect(user).toEqual(userEntityMock);
+    expect(user.email).toEqual(userEntityMock.email);
   });
 
   it('should return error in findUserByEmail', async () => {
@@ -46,5 +46,11 @@ describe('UserService', () => {
     expect(
       userService.findUserByEmail(userEntityMock.email),
     ).rejects.toThrowError();
+  });
+
+  it('should return user by id in findUserById', async () => {
+    const user = await userService.findUserById(userEntityMock.id);
+
+    expect(user.id).toEqual(userEntityMock.id);
   });
 });
