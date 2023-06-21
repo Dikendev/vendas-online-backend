@@ -47,7 +47,7 @@ export class UserService {
   async findUserByEmail(email: string): Promise<UserEntity | undefined> {
     const user = await this.userRepository.findOne({
       where: {
-        email: email,
+        email,
       },
     });
 
