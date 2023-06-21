@@ -15,11 +15,11 @@ export class UserService {
     return this.userRepository.save(newUserDTO);
   }
 
-  async getAllUser(): Promise<UserEntity[]> {
+  async findAllUser(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
 
-  async getUserByRelations(userId: number): Promise<UserEntity> {
+  async findUserByRelations(userId: number): Promise<UserEntity> {
     return await this.userRepository.findOne({
       where: {
         id: userId,
@@ -30,7 +30,7 @@ export class UserService {
     });
   }
 
-  async getUserById(userId: number): Promise<UserEntity> {
+  async findUserById(userId: number): Promise<UserEntity | undefined> {
     const user = await this.userRepository.findOne({
       where: {
         id: userId,
