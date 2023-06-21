@@ -39,4 +39,12 @@ describe('UserService', () => {
 
     expect(user).toEqual(userEntityMock);
   });
+
+  it('should return error in findUserByEmail', async () => {
+    jest.spyOn(userRepository, 'findOne').mockResolvedValue(undefined);
+
+    expect(
+      userService.findUserByEmail(userEntityMock.email),
+    ).rejects.toThrowError();
+  });
 });
