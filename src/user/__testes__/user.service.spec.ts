@@ -33,4 +33,10 @@ describe('UserService', () => {
     expect(userService).toBeDefined();
     expect(userRepository).toBeDefined();
   });
+
+  it('should return user in findUserByEmail', async () => {
+    const user = await userService.findUserByEmail(userEntityMock.email);
+
+    expect(user).toEqual(userEntityMock);
+  });
 });
