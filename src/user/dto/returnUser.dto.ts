@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from 'class-validator';
 import { UserEntity } from '../entities/user.entity';
-import { ReturnAddressDTO } from 'src/address/dto/returnAddress.dto';
+import { ReturnAddressDTO } from '../../address/dto/returnAddress.dto';
 
 export class ReturnUserDto {
   @IsNumber()

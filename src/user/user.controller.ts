@@ -11,6 +11,8 @@ import { UserEntity } from './entities/user.entity';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { ReturnUserDto } from './dto/returnUser.dto';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from './enum/role.enum';
 
 @Controller('user')
 export class UserController {
@@ -22,6 +24,7 @@ export class UserController {
     return this.userService.createUser(newUser);
   }
 
+  @Roles(Role.User)
   @UsePipes(ValidationPipe)
   @Get()
   async getAllUsers(): Promise<ReturnUserDto[]> {
