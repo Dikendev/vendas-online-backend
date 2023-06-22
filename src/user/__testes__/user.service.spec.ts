@@ -48,6 +48,16 @@ describe('UserService', () => {
     ).rejects.toThrowError();
   });
 
+  it('should return error in findUserByEmail (error query)', async () => {
+    jest
+      .spyOn(userRepository, 'findOne')
+      .mockRejectedValueOnce(new Error('Async error'));
+
+    expect(
+      userService.findUserByEmail(userEntityMock.email),
+    ).rejects.toThrowError();
+  });
+
   it('should return user by id in findUserById', async () => {
     const user = await userService.findUserById(userEntityMock.id);
 
