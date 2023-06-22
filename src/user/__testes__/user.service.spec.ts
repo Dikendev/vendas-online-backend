@@ -64,7 +64,7 @@ describe('UserService', () => {
     expect(user.id).toEqual(userEntityMock.id);
   });
 
-  it('should return user by relations', async () => {
+  it('should return user relations in findUserByRelations', async () => {
     const user = await userService.findUserByRelations(userEntityMock.id);
 
     expect(user.id).toEqual(userEntityMock.id);
